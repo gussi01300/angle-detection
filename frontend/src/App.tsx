@@ -33,6 +33,7 @@ function App() {
     canny_high: 150,
     min_line_length: 50,
     max_line_gap: 20,
+    buffer_radius: 5,
   });
   const imageRef = useRef<HTMLImageElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -573,6 +574,17 @@ function App() {
                           className="slider"
                         />
                       </div>
+                      <div>
+                        <label className="text-sm text-gray-400">Buffer Radius: {autoParams.buffer_radius}</label>
+                        <input
+                          type="range"
+                          min="0"
+                          max="50"
+                          value={autoParams.buffer_radius}
+                          onChange={e => setAutoParams(p => ({ ...p, buffer_radius: Number(e.target.value) }))}
+                          className="slider"
+                        />
+                      </div>
                     </div>
                     <button
                       onClick={handleDetectLines}
@@ -581,34 +593,6 @@ function App() {
                     >
                       {loading ? 'Scanning...' : 'Scan for Lines'}
                     </button>
-                  </div>
-                )}
-
-                {mode === 'auto' && detectedLines.length > 0 && (
-                  <div className="card">
-                    <h3 className="font-medium text-gray-700 mb-4">Detected Lines - Click to select</h3>
-                    <div className="space-y-2">
-                      {detectedLines.map((line, i) => {
-                        const letters = ['A', 'B', 'C', 'D', 'E'];
-                        const isSelected = selectedLineIndices.includes(i);
-                        return (
-                          <button
-                            key={i}
-                            onClick={() => handleAutoLineSelect(i)}
-                            onMouseEnter={() => setHoveredLineIndex(i)}
-                            onMouseLeave={() => setHoveredLineIndex(null)}
-                            className={`line-button ${isSelected ? 'selected' : ''}`}
-                          >
-                            <span className="line-letter">{letters[i]}</span>
-                            <span className="line-info">
-                              ({line.x1}, {line.y1}) → ({line.x2}, {line.y2})
-                            </span>
-                            <span className="line-confidence">{Math.round(line.confidence * 100)}%</span>
-                          </button>
-                        );
-                      })}
-                    </div>
-                    <p className="text-xs text-gray-500 mt-2">Drag cyan handles to adjust lines</p>
                   </div>
                 )}
 
@@ -681,6 +665,33 @@ function App() {
                       </span>
                     </div>
                   )}
+                </div>
+              </div>
+            )}
+
+            {mode === 'auto' && detectedLines.length > 0 && (
+              <div className="card">
+                <h3 className="font-medium text-gray-700 mb-4">Detected Lines - Click to select (drag cyan handles to adjust)</h3>
+                <div className="detected-lines-grid">
+                  {detectedLines.map((line, i) => {
+                    const letters = ['A', 'B', 'C', 'D', 'E'];
+                    const isSelected = selectedLineIndices.includes(i);
+                    return (
+                      <button
+                        key={i}
+                        onClick={() => handleAutoLineSelect(i)}
+                        onMouseEnter={() => setHoveredLineIndex(i)}
+                        onMouseLeave={() => setHoveredLineIndex(null)}
+                        className={`line-button ${isSelected ? 'selected' : ''}`}
+                      >
+                        <span className="line-letter">{letters[i]}</span>
+                        <span className="line-info">
+                          ({line.x1}, {line.y1}) → ({line.x2}, {line.y2})
+                        </span>
+                        <span className="line-confidence">{Math.round(line.confidence * 100)}%</span>
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
             )}

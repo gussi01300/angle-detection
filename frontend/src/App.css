@@ -764,3 +764,124 @@ textarea {
   border-radius: 8px;
   cursor: crosshair;
 }
+
+/* Detected lines grid for mobile */
+.detected-lines-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+/* Responsive styles */
+@media (max-width: 900px) {
+  .main-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sidebar {
+    order: 1;
+  }
+
+  .content-area {
+    order: 2;
+  }
+
+  .app-container {
+    padding: 1rem;
+  }
+
+  .max-w-7xl {
+    max-width: 100%;
+  }
+
+  .p-8 {
+    padding: 1rem;
+  }
+
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .card {
+    padding: 1rem;
+  }
+
+  .image-container {
+    padding: 1rem;
+  }
+
+  .overlay-canvas {
+    top: 1rem;
+    left: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-container {
+    padding: 0.5rem;
+  }
+
+  .p-8 {
+    padding: 0.75rem;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .subtitle {
+    font-size: 0.875rem;
+  }
+
+  .card {
+    padding: 0.75rem;
+    border-radius: 8px;
+  }
+
+  .btn-primary, .btn-secondary {
+    padding: 0.625rem 1rem;
+    font-size: 0.75rem;
+  }
+
+  .slider {
+    height: 4px;
+  }
+
+  .slider::-webkit-slider-thumb {
+    width: 14px;
+    height: 14px;
+  }
+
+  .image-container {
+    padding: 0.75rem;
+  }
+
+  .overlay-canvas {
+    top: 0.75rem;
+    left: 0.75rem;
+  }
+
+  .uploaded-image {
+    max-height: 350px;
+  }
+
+  .line-button {
+    padding: 0.5rem 0.75rem;
+  }
+
+  .line-letter {
+    width: 24px;
+    height: 24px;
+    font-size: 0.7rem;
+  }
+
+  .line-info {
+    font-size: 0.7rem;
+  }
+
+  .detected-lines-grid {
+    max-height: 150px;
+  }
+}

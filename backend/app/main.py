@@ -33,6 +33,7 @@ class DetectLinesRequest(BaseModel):
     canny_high: int = 150
     min_line_length: int = 50
     max_line_gap: int = 20
+    buffer_radius: int = 5
 
 
 class CalculateAngleRequest(BaseModel):
@@ -77,7 +78,8 @@ async def detect_lines_endpoint(request: DetectLinesRequest) -> dict:
         canny_low=request.canny_low,
         canny_high=request.canny_high,
         min_line_length=request.min_line_length,
-        max_line_gap=request.max_line_gap
+        max_line_gap=request.max_line_gap,
+        buffer_radius=request.buffer_radius
     )
 
     return {"image_id": request.image_id, "lines": lines}
