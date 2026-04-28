@@ -1,14 +1,9 @@
-FROM python:3.11
+FROM python:3.11-slim
 
 WORKDIR /app
 
-# Install system dependencies for OpenCV
+# Install minimal system dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    libgl1-mesa-glx \
-    libglib2.0-0 \
-    libsm6 \
-    libxext6 \
-    libxrender1 \
     libgomp1 \
     curl \
     && rm -rf /var/lib/apt/lists/*
@@ -16,7 +11,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 # Copy requirements first for caching
 COPY backend/requirements.txt .
 
-# Install Python dependencies
+# Install Python dependencies (opencv-python-headless avoids GUI library issues)
 RUN pip install --no-cache-dir -r requirements.txt
 
 # Copy backend code
