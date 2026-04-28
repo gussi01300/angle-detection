@@ -26,8 +26,8 @@ WORKDIR /app
 RUN mkdir -p /app/backend/app/static
 RUN mv /app/frontend/dist /app/backend/app/static/
 
-# Install Python dependencies
-RUN pip install --no-cache-dir -r requirements.txt
+# Install Python dependencies (from backend folder)
+RUN pip install --no-cache-dir -r backend/requirements.txt
 
 # Create uploads directory
 RUN mkdir -p /app/uploads
