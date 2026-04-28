@@ -697,7 +697,7 @@ function App() {
                       >
                         <span className="line-letter">{letters[i]}</span>
                         <span className="line-info">
-                          ({line.x1}, {line.y1}) → ({line.x2}, {line.y2})
+                          ({Math.round(line.x1)}, {Math.round(line.y1)}) → ({Math.round(line.x2)}, {Math.round(line.y2)})
                         </span>
                         <span className="line-confidence">{Math.round(line.confidence * 100)}%</span>
                       </button>
