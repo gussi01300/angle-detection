@@ -130,6 +130,6 @@ async def delete_image(image_id: str):
 
 
 # Serve frontend static files in production
-frontend_dist = Path(__file__).parent.parent.parent / "frontend" / "dist"
+frontend_dist = Path(__file__).parent / "static" / "dist"
 if frontend_dist.exists():
     app.mount("/", StaticFiles(directory=str(frontend_dist), html=True), name="frontend")

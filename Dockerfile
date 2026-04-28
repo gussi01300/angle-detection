@@ -8,26 +8,26 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements first for caching
-COPY backend/requirements.txt .
-
-# Install Python dependencies (opencv-python-headless avoids GUI library issues)
-RUN pip install --no-cache-dir -r requirements.txt
-
-# Copy backend code
-COPY backend/ ./backend/
-
 # Install Node.js for frontend build
 RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
     && apt-get install -y nodejs \
     && npm install -g npm@latest
 
-# Copy and build frontend
-COPY frontend/package*.json frontend/vite.config.ts ./
-RUN npm install
+# Copy entire project
+COPY . .
 
-COPY frontend/ ./frontend/
+# Build frontend
+WORKDIR /app/frontend
+RUN npm install
 RUN npm run build
+
+# Move build to backend static location
+WORKDIR /app
+RUN mkdir -p /app/backend/app/static
+RUN mv /app/frontend/dist /app/backend/app/static/
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt
 
 # Create uploads directory
 RUN mkdir -p /app/uploads
