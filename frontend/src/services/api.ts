@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API_BASE = 'http://localhost:8000';
+// Use relative URLs in production, localhost:8000 in development
+const API_BASE = import.meta.env.PROD ? '' : 'http://localhost:8000';
 
 export interface DetectedLine {
   x1: number;

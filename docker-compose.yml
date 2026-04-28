@@ -1,0 +1,15 @@
+services:
+  angle-detection:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: angle-detection
+    ports:
+      - "8000:8000"
+    volumes:
+      # Persist uploaded images
+      - angle-uploads:/app/uploads
+    restart: unless-stopped
+
+volumes:
+  angle-uploads:
