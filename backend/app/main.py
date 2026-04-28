@@ -33,7 +33,7 @@ class DetectLinesRequest(BaseModel):
     canny_high: int = 150
     min_line_length: int = 50
     max_line_gap: int = 20
-    buffer_radius: int = 15
+    buffer_radius: int = 100
     use_buffer_radius: bool = True
 
 

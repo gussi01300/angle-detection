@@ -33,7 +33,7 @@ function App() {
     canny_high: 150,
     min_line_length: 50,
     max_line_gap: 20,
-    buffer_radius: 15,
+    buffer_radius: 100,
     use_buffer_radius: true,
   });
   const imageRef = useRef<HTMLImageElement>(null);
@@ -590,7 +590,7 @@ function App() {
                         <input
                           type="range"
                           min="0"
-                          max="50"
+                          max="200"
                           value={autoParams.buffer_radius}
                           onChange={e => setAutoParams(p => ({ ...p, buffer_radius: Number(e.target.value) }))}
                           className="slider"
