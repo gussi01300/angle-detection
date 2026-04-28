@@ -38,7 +38,7 @@ export const api = {
 
   detectLines: async (
     imageId: string,
-    params: { canny_low?: number; canny_high?: number; min_line_length?: number; max_line_gap?: number; buffer_radius?: number } = {}
+    params: { canny_low?: number; canny_high?: number; min_line_length?: number; max_line_gap?: number; buffer_radius?: number; use_buffer_radius?: boolean } = {}
   ): Promise<DetectLinesResponse> => {
     const response = await axios.post(`${API_BASE}/api/v1/detect-lines`, {
       image_id: imageId,

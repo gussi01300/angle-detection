@@ -5,7 +5,9 @@
       "Bash(npm install *)",
       "Bash(npx tailwindcss *)",
       "Bash(npm run *)",
-      "Bash(pip install *)"
+      "Bash(pip install *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)"
     ]
   }
 }

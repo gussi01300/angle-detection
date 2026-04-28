@@ -33,7 +33,8 @@ function App() {
     canny_high: 150,
     min_line_length: 50,
     max_line_gap: 20,
-    buffer_radius: 5,
+    buffer_radius: 15,
+    use_buffer_radius: true,
   });
   const imageRef = useRef<HTMLImageElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -573,6 +574,16 @@ function App() {
                           onChange={e => setAutoParams(p => ({ ...p, max_line_gap: Number(e.target.value) }))}
                           className="slider"
                         />
+                      </div>
+                      <div className="flex items-center gap-3 mb-2">
+                        <input
+                          type="checkbox"
+                          id="use-buffer"
+                          checked={autoParams.use_buffer_radius}
+                          onChange={e => setAutoParams(p => ({ ...p, use_buffer_radius: e.target.checked }))}
+                          className="w-4 h-4 accent-cyan-400"
+                        />
+                        <label htmlFor="use-buffer" className="text-sm text-gray-400">Use Buffer Radius (filter duplicate lines)</label>
                       </div>
                       <div>
                         <label className="text-sm text-gray-400">Buffer Radius: {autoParams.buffer_radius}</label>
